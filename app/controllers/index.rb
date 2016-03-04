@@ -27,9 +27,14 @@ get '/homepage' do
   @leaders = @leaders.to_a
   @leader_tweet = []
   @leaders.each do |leader|
-    @leader_tweet << Tweet.where(user_id: leader.leader_id).to_a
+    @shit = Tweet.where(user_id: leader.leader_id).to_a
+    @shit.each do |tweet|
+      @leader_tweet << tweet
+    end
   end
-  p @leader_tweet
+   p @leader_tweet
+   @leader_tweet = @leader_tweet.sort_by! &:created_at
+   @leader_tweet = @leader_tweet.reverse
   erb :homepage
 end
 
@@ -83,5 +88,6 @@ end
 post '/users/:id/add_leader/' do
   @id = params[:id]
   @friendship = Friendship.create(leader_id: @id, follower_id: session[:user_id])
+  #upcounter
   redirect "/users/#{@id}/show"
 end

@@ -31,11 +31,9 @@
 </form>
 
 
-<p><% @leader_tweet.each do |tweets| %></p>
-  <p><% tweets.each do |tweet| %></p>
+<p><% @leader_tweet.each do |tweet| %></p>
      <p><%= tweet.text %></p>
      <p><%= tweet.created_at %></p>
-    <p><% end %></p>
 <p><% end %></p>
 
 
