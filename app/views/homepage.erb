@@ -1,0 +1,40 @@
+<!-- <p>homepage</p>
+
+<form name='new_tweet' action='/tweets/new' method='post'>
+  <label> Type a New Tweet! (Limit 140 chars) </label>
+  <input name="text" type="text" value="">
+  <input type='submit' value='Tweet Me!' class='button'>
+</form>
+
+<form name='logout' action='/logout' method='post'>
+<input type='submit' value='Log Out' class='button'>
+</form> -->
+
+<p><a href= '/homepage'>Home</a></p>
+<!-- This is to tweet from any page -->
+<p><a href= '/homepage'>Tweet</a></p>
+<!-- <p><a href= '/logout'>Logout</a></p> -->
+<form name='logout' action='/logout' method='post'>
+<input type='submit' value='Log Out' class='button'>
+</form>
+
+<!-- SEARCH -->
+<form method='POST' action='/search'>
+  <input type="text" name="leader" value="Search for leader here">
+</form>
+
+<p>Users image</p>
+<form name='new_tweet' action='/tweets/new' method='post'>
+  <label> Type a New Tweet! (Limit 140 chars) </label>
+  <input name="text" type="text" value="">
+  <input type='submit' value='Tweet Me!' class='button'>
+</form>
+
+<p><% @tweets.each do |tweet| %></p>
+    <p>image</p>
+     <p><%= tweet.text %></p>
+     <p><%= tweet.created_at %></p>
+<p><% end %></p>
+
+
+

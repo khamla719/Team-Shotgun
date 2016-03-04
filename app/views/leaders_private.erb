@@ -1,0 +1,33 @@
+<form action='/tweets/new' method='get'>
+  <input type='submit' value='write tweet' class='button'>
+</form>
+
+<center>
+  <h2><%= user.first_name + user.last_name %></h2>
+</center>
+  <br>
+  <br>
+<center>
+  <h3><%= user.user_name %></h3>
+</center>
+  <br>
+  <br>
+
+<center>
+  <h2>Leaders</h2>
+</center>
+  <br>
+  <br>
+
+<center>
+  <table>
+    <tr>
+      <td>
+        <form action="/users/<%= @entry.id %>" method="post">
+          <input type="button" name="_method" type="hidden" value="delete">
+          <input type="submit" value="Delete" class="button">
+        </form>
+      </td>
+    </tr>
+  </table>
+</center>

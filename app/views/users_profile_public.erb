@@ -1,0 +1,21 @@
+<p><a href= '/homepage'>Home</a></p>
+<p><a href= '/homepage'>Tweet</a></p>
+<form name='logout' action='/logout' method='post'>
+<input type='submit' value='Log Out' class='button'>
+</form>
+
+<form method='POST' action='/search'>
+  <input type="text" name="leader" value="Search for leader here">
+</form>
+
+
+<p> Users Image </p>
+<p> Leaders Name </p>
+
+
+<p><% @tweets.each do |tweet| %></p>
+    <p>image</p>
+    <p><%= tweet.user_id %></p>
+    <p><%= tweet.text %></p>
+<p><% end %></p>
+

@@ -1,0 +1,33 @@
+<p><a href= '/homepage'>Home</a></p>
+<p><a href= '/tweets'>Tweet</a></p>
+<p><a href= '/logout'>Logout</a></p>
+
+<form method='POST' action='/search'>
+  <input type="text" name="leader" value="Search for leader here">
+</form>
+
+#********************************************************
+
+<p> Users Image </p>
+<p> Leaders  Name </p>
+<p> <%=user.leaders_count %>Leaders </p>
+<p> <%=user.followers_count %> Followers </p>
+
+#*********************************************************
+
+
+#Your tweet here
+<p>Users image</p>
+<form method = 'POST' action='/tweets'>
+  <input name="tweet[text]" type="text" value="Tweet here...">
+</form>
+
+#You Tweet Feed
+<p><% tweets.each do |tweet| %></p>
+    <p>image</p>
+    <p><%= tweet.author %></p>
+    <p><%= tweet.text %></p>
+    <a href= '/tweet/tweet.id/edit'> Edit</a>
+    <a href= '/delete'> Delete</a>
+<p><% end %></p>
+
