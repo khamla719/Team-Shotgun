@@ -76,8 +76,11 @@ post '/logout' do
 end
 
 post '/search' do
+  p params
+  p "*************************************************"
+
   @leader = User.find_by(user_name: params[:leader])
-  redirect "/users/#{@leader.id}/show"
+  redirect "/users/@leader.id/show"
 end
 
 
@@ -85,8 +88,20 @@ get '/users/:id/show' do
   @tweets = Tweet.where(id: params[:id])
   @id = params[:id]
   @leader = User.find_by(id: params[:id])
-  erb :users_profile_public
+  redirect '/users_profile_public'
 end
+
+get '/users/:id/followers' do
+  p params
+  p "*************************************************"
+
+  @user = User.find(session[:user_id])
+  @tweets = Tweet.where(id: params[:id])
+  @id = params[:id]
+  @leader = User.find_by(id: params[:id])
+  erb :followers_private
+end
+
 
 post '/users/:id/add_leader/' do
   @id = params[:id]

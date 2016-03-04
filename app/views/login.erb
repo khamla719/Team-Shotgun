@@ -1,4 +1,63 @@
-<p> Here we will login </p>
+<head>
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/styles.css">    
+</head>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/login">Home</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  
+        
+
+        <!-- search bar -->
+      <form class="navbar-form navbar-right" role="search" method='POST' action='/search'>
+        <div class="form-group">
+          <input name="leaders[user_name]" type="text" class="form-control" placeholder="Search for leader here">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- log out button -->
+        <li> 
+        	
+		</li>
+        <!-- Create Tweet -->
+        <li>
+        </li>
+         
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+
+
+
+
+<div class = "container">
+
+    <div class = "jumbotron text-center">
+      <img src = "imgs/2.jpg" width="250px" heigt="200px">
+
 
 <form action = '/login' method = 'post'>
 
@@ -13,3 +72,7 @@
 </form>
 
 <a href="/signup">Sign Up!</a>
+</div>
+</div>
+
+
