@@ -16,19 +16,20 @@
 <form name='logout' action='/logout' method='post'>
 <input type='submit' value='Log Out' class='button'>
 </form>
-<p> ********************User Profile *****************************</p>
-<p>Name: <%=@user.first_name %> <%=@user.last_name %></p>
-<p>Username: <%=@user.user_name %></p>
-<p><a href= 'user/<%=@user.id%>/followers'>Followers: <%=@user.followers_count %></a></p>
-<p><a href= 'user/<%=@user.id%>/leaders'>Leaders: <%=@user.leaders_count %></a></p>
 
-<p> ********************Tweet  *****************************</p>
 <!-- SEARCH -->
 <form method='POST' action='/search'>
-  <input type="text" name="leader" value="Search for leader here">
+  <input type="text" name="leader" value="Search">
 </form>
 
-<p>Users image</p>
+<p> ********************My Profile *****************************</p>
+<p><a href='/users/<%= @user.id %>/private_profile'> <%=@user.first_name %> <%=@user.last_name %></a></p>
+<p>Username: <%=@user.user_name %></p>
+<p><a href= 'users/<%=@user.id%>/followers'>Followers: <%= @user.followers_count %></a></p>
+<p><a href= 'users/<%=@user.id%>/leaders'>Leaders: <%=@user.leaders_count %></a></p>
+
+<p> ********************Tweet Feed *****************************</p>
+
 <form name='new_tweet' action='/tweets/new' method='post'>
   <label> Type a New Tweet! (Limit 140 chars) </label>
   <input name="text" type="text" value="">

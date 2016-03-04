@@ -1,0 +1,8 @@
+<p> Leaders </p>
+
+
+<p> <% @all_leaders.each do |leader| %></p>
+
+  <p><a href = '/users/<%=leader.id %>/show'> <%= leader.first_name %></a> </p>
+<p><% end %> </p>
+

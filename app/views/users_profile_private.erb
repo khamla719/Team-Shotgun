@@ -1,31 +1,30 @@
-<p><a href= '/homepage'>Home</a></p>
-<p><a href= '/tweets'>Tweet</a></p>
-<p><a href= '/logout'>Logout</a></p>
+<p><a href= '/homepage'>Homepage</a></p>
+<form name='logout' action='/logout' method='post'>
+<input type='submit' value='Log Out' class='button'>
+</form>
 
+<!-- SEARCH -->
 <form method='POST' action='/search'>
-  <input type="text" name="leader" value="Search for leader here">
+  <input type="text" name="leader" value="Search">
 </form>
 
-#********************************************************
+<p> ********************My Profile *****************************</p>
+<p><a href='http://localhost:9393/users/<%= @user.id %>/private_profile'> <%=@user.first_name %> <%=@user.last_name %></a></p>
+<p>Username: <%=@user.user_name %></p>
+<p><a href= 'http://localhost:9393/users/<%=@user.id%>/followers'>Followers: <%= @user.followers_count %></a></p>
+<p><a href= 'http://localhost:9393/users/<%=@user.id%>/leaders'>Leaders: <%=@user.leaders_count %></a></p>
 
-<p> Users Image </p>
-<p> Leaders  Name </p>
-<p> <%=user.leaders_count %>Leaders </p>
-<p> <%=user.followers_count %> Followers </p>
+<p> ********************Tweet Now *****************************</p>
 
-#*********************************************************
-
-
-#Your tweet here
-<p>Users image</p>
-<form method = 'POST' action='/tweets'>
-  <input name="tweet[text]" type="text" value="Tweet here...">
+<form name='new_tweet' action='/tweets/new' method='post'>
+  <label> Type a New Tweet! (Limit 140 chars) </label>
+  <input name="text" type="text" value="">
+  <input type='submit' value='Tweet Me!' class='button'>
 </form>
 
-#You Tweet Feed
-<p><% tweets.each do |tweet| %></p>
-    <p>image</p>
-    <p><%= tweet.author %></p>
+<p> ********************Your Tweet Feed *****************************</p>
+
+<p><% @tweets.each do |tweet| %></p>
     <p><%= tweet.text %></p>
     <a href= '/tweet/tweet.id/edit'> Edit</a>
     <a href= '/delete'> Delete</a>

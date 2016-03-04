@@ -2,11 +2,11 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
   has_many :tweets
-  has_many :followers, through: :friendship
+  has_many :friendships
   has_many :leaders, through: :friendship
 
   validates :first_name, :last_name, :user_name, :email, :encrypted_password, :location, presence: true
-  validates :user_name, :email, uniqueness: true
+  validates :user_name, uniqueness: true
 
 
   def password
