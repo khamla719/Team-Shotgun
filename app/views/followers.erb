@@ -1,0 +1,8 @@
+<p> Followers </p>
+
+
+<p> <% @all_followers.each do |follower| %></p>
+
+  <p><a href = '/users/<%=follower.id %>/show'> <%= follower.first_name %></a> </p>
+<p><% end %> </p>
+

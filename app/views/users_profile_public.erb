@@ -8,20 +8,22 @@
   <input type="text" name="leader" value="Search for leader here">
 </form>
 
+<p> ********************<%=@leader.first_name %> Profile *****************************</p>
 
-<p>Name: <%=@leader.first_name %> <%=@leader.last_name %></p>
+
+ <%=@leader.first_name %> <%=@leader.last_name %></p>
 <p>Username: <%=@leader.user_name %></p>
-<p>Followers: <%=@leader.followers_count %></p>
-<p>Leaders: <%=@leader.leaders_count %></p>
+<p><a href= 'http://localhost:9393/users/<%=@leader.id%>/followers'>Followers: <%= @leader.followers_count %></a></p>
+<p><a href= 'http://localhost:9393/users/<%=@leader.id%>/leaders'>Leaders: <%=@leader.leaders_count %></a></p>
 
 <form name='add_leader' action="/users/<%= @id %>/add_leader/" method='post'>
 <input type='submit' value='Add Leader' class='button'>
 </form>
 
+<p> ******************** <%=@leader.first_name %> Tweets *****************************</p>
 
 <p><% @tweets.each do |tweet| %></p>
-    <p>image</p>
-    <p><%= tweet.user_id %></p>
     <p><%= tweet.text %></p>
+    <p><%= tweet.created_at %></p>
 <p><% end %></p>
 

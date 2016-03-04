@@ -22,7 +22,6 @@ end
 #view user homepage
 get '/homepage' do
   @user=User.find_by(id: session[:user_id])
-  p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   @tweets = Tweet.where(user_id: session[:user_id])
   @tweets = @tweets.to_a
   @leaders = Friendship.where(follower_id: session[:user_id])
@@ -60,15 +59,16 @@ post '/users/new' do
 end
 
 post '/tweets/new' do
-  p session
   @tweet = Tweet.new(text:params[:text], user_id: (session[:user_id]))
     if @tweet.save
-      redirect "/homepage"
+      redirect "/users/#{session[:user_id]}/private_profile"
     else
       @errors = @tweet.errors.full_messages
       redirect '/signup'
     end
 end
+
+
 
 post '/logout' do
   session.delete(:user_id)
@@ -82,7 +82,7 @@ end
 
 
 get '/users/:id/show' do
-  @tweets = Tweet.where(id: params[:id])
+  @tweets = Tweet.where(user_id: params[:id])
   @id = params[:id]
   @leader = User.find_by(id: params[:id])
   erb :users_profile_public
@@ -94,9 +94,13 @@ post '/users/:id/add_leader/' do
   if @friendship.save #only increases if they are not already friends
 
     #increase users leaders count
-    @users = User.find_by(session[:id])
-    @leaders_count = @users.leaders_count + 1
-    @users.update(leaders_count: @leaders_count)
+    p session[:id]
+    p '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    p @users = User.find_by(id: session[:user_id])
+    p '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    p @leaders_count = @users.leaders_count + 1
+    p '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    p @users.update(leaders_count: @leaders_count)
 
     #increase leaders followers count
     @leader = User.find_by(id: @id)
@@ -106,4 +110,34 @@ post '/users/:id/add_leader/' do
     redirect "/users/#{@id}/show"
   end
   redirect "/homepage"
+end
+
+get '/users/:id/followers' do
+  @followers = Friendship.where(leader_id: session[:user_id])
+  @followers = @followers.to_a
+  @all_followers = []
+  @followers.each do |friendship|
+    @all_followers << User.find_by(id: friendship.follower_id)
+  end
+  erb :followers
+end
+
+get '/users/:id/leaders' do
+  @leaders = Friendship.where(follower_id: session[:user_id])
+  @leaders = @leaders.to_a
+  @all_leaders = []
+  @leaders.each do |friendship|
+    @all_leaders << User.find_by(id: friendship.leader_id)
+  end
+  erb :leaders_public
+end
+
+get '/users/:id/private_profile' do
+  if session[:user_id].to_s == params[:id]
+    p @tweets = Tweet.where(user_id: params[:id])
+    p '#############################'
+    @id = params[:id]
+    @user = User.find_by(id: params[:id])
+    erb :users_profile_private
+  end
 end
