@@ -51,7 +51,7 @@ end
 post '/users/new' do
   @user = User.new(params[:user])
     if @user.save
-      redirect "/homepage"
+      redirect "/login"
     else
       @errors = @user.errors.full_messages
       redirect '/signup'
