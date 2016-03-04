@@ -19,11 +19,24 @@ post '/login' do
     end
 end
 
-
 #view user homepage
 get '/homepage' do
+  @user=User.find_by(id: session[:user_id])
+  p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   @tweets = Tweet.where(user_id: session[:user_id])
   @tweets = @tweets.to_a
+  @leaders = Friendship.where(follower_id: session[:user_id])
+  @leaders = @leaders.to_a
+  @leader_tweet = []
+  @leaders.each do |leader|
+    @shit = Tweet.where(user_id: leader.leader_id).to_a
+    @shit.each do |tweet|
+      @leader_tweet << tweet
+    end
+  end
+  @leader_tweet
+   @leader_tweet = @leader_tweet.sort_by! &:created_at
+   @leader_tweet = @leader_tweet.reverse
   erb :homepage
 end
 
@@ -69,6 +82,28 @@ end
 
 
 get '/users/:id/show' do
-  @tweets = Tweet.where(user_id: params[:id])
+  @tweets = Tweet.where(id: params[:id])
+  @id = params[:id]
+  @leader = User.find_by(id: params[:id])
   erb :users_profile_public
+end
+
+post '/users/:id/add_leader/' do
+  @id = params[:id]
+  @friendship = Friendship.new(leader_id: @id, follower_id: session[:user_id])
+  if @friendship.save #only increases if they are not already friends
+
+    #increase users leaders count
+    @users = User.find_by(session[:id])
+    @leaders_count = @users.leaders_count + 1
+    @users.update(leaders_count: @leaders_count)
+
+    #increase leaders followers count
+    @leader = User.find_by(id: @id)
+    @followers_count = @leader.followers_count + 1
+    @leader.update(followers_count: @followers_count)
+
+    redirect "/users/#{@id}/show"
+  end
+  redirect "/homepage"
 end
