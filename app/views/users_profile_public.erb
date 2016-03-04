@@ -11,6 +11,9 @@
 
 <p> Users Image </p>
 <p> Leaders Name </p>
+<form name='add_leader' action="/users/<%= @id %>/add_leader/" method='post'>
+<input type='submit' value='Add Leader' class='button'>
+</form>
 
 
 <p><% @tweets.each do |tweet| %></p>
