@@ -13,11 +13,16 @@
 <p><a href= '/homepage'>Home</a></p>
 <!-- This is to tweet from any page -->
 <p><a href= '/homepage'>Tweet</a></p>
-<!-- <p><a href= '/logout'>Logout</a></p> -->
 <form name='logout' action='/logout' method='post'>
 <input type='submit' value='Log Out' class='button'>
 </form>
+<p> ********************User Profile *****************************</p>
+<p>Name: <%=@user.first_name %> <%=@user.last_name %></p>
+<p>Username: <%=@user.user_name %></p>
+<p><a href= 'user/<%=@user.id%>/followers'>Followers: <%=@user.followers_count %></a></p>
+<p><a href= 'user/<%=@user.id%>/leaders'>Leaders: <%=@user.leaders_count %></a></p>
 
+<p> ********************Tweet  *****************************</p>
 <!-- SEARCH -->
 <form method='POST' action='/search'>
   <input type="text" name="leader" value="Search for leader here">
